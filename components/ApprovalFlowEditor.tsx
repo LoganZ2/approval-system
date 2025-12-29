@@ -93,14 +93,14 @@ const FlowEditorContent: React.FC<ApprovalFlowEditorProps> = ({
         },
       ]);
       setEdges(template.edges || []);
-      // Reset form with template data - only if form is ready
-      if (form) {
-        form.setFieldsValue({
-          name: template.name || '',
-          description: template.description || '',
-          category: template.category || 'general',
-        });
-      }
+      // // Reset form with template data - only if form is ready
+      // if (form) {
+      //   form.setFieldsValue({
+      //     name: template.name || '',
+      //     description: template.description || '',
+      //     category: template.category || 'general',
+      //   });
+      // }
     } else {
       // Reset to initial state when creating new template
       setNodes([
@@ -113,13 +113,13 @@ const FlowEditorContent: React.FC<ApprovalFlowEditorProps> = ({
       ]);
       setEdges([]);
       // Reset form - only if form is ready
-      if (form) {
-        form.setFieldsValue({
-          name: '',
-          description: '',
-          category: 'general',
-        });
-      }
+      // if (form) {
+      //   form.setFieldsValue({
+      //     name: '',
+      //     description: '',
+      //     category: 'general',
+      //   });
+      // }
     }
   }, [template, setNodes, setEdges, form]);
 
@@ -144,6 +144,26 @@ const FlowEditorContent: React.FC<ApprovalFlowEditorProps> = ({
 
     fetchApprovers();
   }, []);
+
+  useEffect(() => {
+    // 只有当 Modal 打开时才操作表单
+    if (isSaveModalVisible && form) {
+      if (template) {
+        // 编辑模式：回填数据
+        form.setFieldsValue({
+          name: template.name || '',
+          description: template.description || '',
+          category: template.category || 'general',
+        });
+      } else {
+        // 新建模式：重置表单
+        form.resetFields();
+        form.setFieldsValue({
+          category: 'general',
+        });
+      }
+    }
+  }, [isSaveModalVisible, template, form]);
 
   const onConnect = useCallback(
     (params: Connection) => setEdges((eds) => addEdge(params, eds)),
