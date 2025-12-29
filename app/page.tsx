@@ -161,8 +161,8 @@ export default function Home() {
     },
     {
       title: '创建时间',
-      dataIndex: 'createdAt',
-      key: 'createdAt',
+      dataIndex: 'created_at',
+      key: 'created_at',
       render: (date: string) => new Date(date).toLocaleDateString(),
     },
     {
@@ -405,7 +405,7 @@ export default function Home() {
                   <div><strong>状态:</strong> <Tag color={getStatusColor(selectedRequest.status)}>{getStatusText(selectedRequest.status)}</Tag></div>
                   <div><strong>优先级:</strong> <Tag color={getPriorityColor(selectedRequest.priority)}>{getPriorityText(selectedRequest.priority)}</Tag></div>
                   <div><strong>分类:</strong> {selectedRequest.category}</div>
-                  <div><strong>创建时间:</strong> {new Date(selectedRequest.createdAt).toLocaleString()}</div>
+                  <div><strong>创建时间:</strong> {new Date(selectedRequest.created_at).toLocaleString()}</div>
                 </Space>
               </Card>
 
