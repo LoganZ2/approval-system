@@ -34,7 +34,7 @@ export const ApproverNode: React.FC<NodeProps<ApproverNodeData>> = ({ data, sele
             icon={<UserOutlined />}
             style={{ marginRight: 8, backgroundColor: '#1890ff' }}
           />
-          <Text strong style={{ fontSize: '12px' }}>审批人</Text>
+          <Text strong style={{ fontSize: '12px' }}>审批节点</Text>
         </div>
 
         <div style={{ marginBottom: 8 }}>

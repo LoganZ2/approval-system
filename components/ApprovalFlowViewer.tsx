@@ -158,7 +158,7 @@ const ApprovalFlowViewer: React.FC<ApprovalFlowViewerProps> = ({ approvalRequest
               type: 'approver' as const,
               position: { x: 200 + (index * 200), y: 100 },
               data: {
-                label: `审批人${index + 1}`,
+                label: `审批节点${index + 1}`,
                 type: 'approver' as const,
                 approverName: approverName
               },
@@ -171,7 +171,7 @@ const ApprovalFlowViewer: React.FC<ApprovalFlowViewerProps> = ({ approvalRequest
             type: 'approver' as const,
             position: { x: 200, y: 100 },
             data: {
-              label: '审批人',
+              label: '审批节点',
               type: 'approver' as const,
               approverName: '待分配'
             },

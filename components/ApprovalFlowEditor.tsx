@@ -93,12 +93,14 @@ const FlowEditorContent: React.FC<ApprovalFlowEditorProps> = ({
         },
       ]);
       setEdges(template.edges || []);
-      // Reset form with template data
-      form.setFieldsValue({
-        name: template.name || '',
-        description: template.description || '',
-        category: template.category || 'general',
-      });
+      // Reset form with template data - only if form is ready
+      if (form) {
+        form.setFieldsValue({
+          name: template.name || '',
+          description: template.description || '',
+          category: template.category || 'general',
+        });
+      }
     } else {
       // Reset to initial state when creating new template
       setNodes([
@@ -110,12 +112,14 @@ const FlowEditorContent: React.FC<ApprovalFlowEditorProps> = ({
         },
       ]);
       setEdges([]);
-      // Reset form
-      form.setFieldsValue({
-        name: '',
-        description: '',
-        category: 'general',
-      });
+      // Reset form - only if form is ready
+      if (form) {
+        form.setFieldsValue({
+          name: '',
+          description: '',
+          category: 'general',
+        });
+      }
     }
   }, [template, setNodes, setEdges, form]);
 
@@ -359,7 +363,7 @@ const FlowEditorContent: React.FC<ApprovalFlowEditorProps> = ({
               icon={<PlusOutlined />}
               onClick={addApproverNode}
             >
-              添加审批人
+              添加审批节点
             </Button>
             <Button
               type="dashed"
@@ -406,10 +410,9 @@ const FlowEditorContent: React.FC<ApprovalFlowEditorProps> = ({
         </Space>
       </Card>
 
-      {isSaveModalVisible && (
         <Modal
           title="保存审批流程模板"
-          open={true}
+          open={isSaveModalVisible}
           onCancel={() => setIsSaveModalVisible(false)}
           onOk={handleSaveConfirm}
           okText="保存模板"
@@ -453,7 +456,6 @@ const FlowEditorContent: React.FC<ApprovalFlowEditorProps> = ({
             </Form.Item>
           </Form>
         </Modal>
-      )}
 
       {/* Approver Selection Modal */}
       <Modal

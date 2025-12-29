@@ -70,7 +70,9 @@ export default function Home() {
         const newRequest = await response.json();
         setApprovalRequests(prev => [...prev, newRequest]);
         setIsModalVisible(false);
-        form.resetFields();
+        if (form) {
+          form.resetFields();
+        }
         message.success('审批请求创建成功');
       } else {
         message.error('创建审批请求失败');
@@ -315,9 +317,11 @@ export default function Home() {
         open={isModalVisible}
         onCancel={() => {
           setIsModalVisible(false);
-          form.resetFields();
+          if (form) {
+            form.resetFields();
+          }
         }}
-        onOk={() => form.submit()}
+        onOk={() => form?.submit()}
         okText="创建"
         cancelText="取消"
         width={600}
@@ -441,7 +445,7 @@ export default function Home() {
             <p><strong>模板:</strong> {selectedTemplate.name}</p>
             <p><strong>描述:</strong> {selectedTemplate.description}</p>
             <p><strong>分类:</strong> {selectedTemplate.category}</p>
-            <p><strong>审批人:</strong> {selectedTemplate.nodes.filter(n => n.type === 'approver').length} 个</p>
+            <p><strong>审批节点:</strong> {selectedTemplate.nodes.filter(n => n.type === 'approver').length} 个</p>
           </div>
         )}
       </Modal>
